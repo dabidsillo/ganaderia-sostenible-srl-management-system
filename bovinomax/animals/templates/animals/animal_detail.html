@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles de {{ object.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<img src="{{ object.photo.url }}" alt="{{ object.name }}" style="max-width: 400px;">
+<p><strong>Raza:</strong> {{ object.breed }}</p>
+<p><strong>Fecha de Nacimiento:</strong> {{ object.date_of_birth }}</p>
+<p><strong>Descripción:</strong> {{ object.description }}</p>
+
+<!-- Botón para aplicar nueva vacuna -->
+<a href="{% url 'animals:apply_vaccine' object.id %}" class="btn btn-primary">Aplicar Nueva Vacuna</a>
+
+<a href="{% url 'animals:animal_list' %}" class="btn btn-secondary">Volver</a>
+
+
+<h2>Historial de Vacunas</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vacuna</th>
+            <th>Fecha de Aplicación</th>
+            <th>Notas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in vaccine_applications %}
+            <tr>
+                <td>{{ application.vaccine.name }}</td>
+                <td>{{ application.date_applied }}</td>
+                <td>{{ application.notes }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No se han registrado vacunas.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

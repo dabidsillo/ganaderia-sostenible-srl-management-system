@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Aplicar Vacuna a {{ animal.name }}{% endblock %}
+
+{% block content %}
+<h1>Aplicar Vacuna a {{ animal.name }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Aplicar Vacuna</button>
+    <a href="{% url 'animals:animal_detail' animal.id %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

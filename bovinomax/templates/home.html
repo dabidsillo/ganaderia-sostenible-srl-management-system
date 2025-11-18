@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BovinoMax</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.pexels.com/photos/2600277/pexels-photo-2600277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        /* Barra superior */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .top-bar h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .top-bar .login-button {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .top-bar .login-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .main-container h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #ffdd57;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Tarjetas animadas */
+        .cards-container {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .card {
+            background: linear-gradient(145deg, rgba(50, 50, 50, 0.9), rgba(25, 25, 25, 0.9));
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 25%;
+            min-width: 280px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 87, 0.5);
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffdd57;
+        }
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Botón de ubicación */
+        .location-button {
+            margin: 40px auto;
+            display: inline-block;
+            background: linear-gradient(45deg, #28a745, #81c784);
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .location-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ccc;
+            font-size: 14px;
+        }
+        footer a {
+            color: #ffdd57;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <h1>BovinoMax</h1>
+        <a href="{% url 'login' %}" class="login-button">Login</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-container">
+        <h2>Bienvenido a BovinoMax</h2>
+
+        <!-- Tarjetas organizadas horizontalmente -->
+        <div class="cards-container">
+            <div class="card">
+                <h2>Misión</h2>
+                <p>Nuestra misión es garantizar una gestión eficiente de los recursos ganaderos, promoviendo prácticas sostenibles y maximizando beneficios.</p>
+            </div>
+            <div class="card">
+                <h2>Visión</h2>
+                <p>Ser líderes en la industria ganadera mediante tecnologías innovadoras para una producción eficiente y sostenible.</p>
+            </div>
+            <div class="card">
+                <h2>Antecedentes</h2>
+                <p>BovinoMax nació para solucionar problemas comunes en la producción ganadera, optimizando recursos esenciales como agua y alimentos.</p>
+            </div>
+        </div>
+
+        <!-- Botón para Google Maps -->
+        <a href="https://maps.app.goo.gl/Uy8YmPpGwcEDnqdc9" target="_blank" class="location-button">
+            Ver Ubicación en Google Maps
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 BovinoMax. Todos los derechos reservados. | <a href="#">Política de Privacidad</a>
+    </footer>
+</body>
+</html>

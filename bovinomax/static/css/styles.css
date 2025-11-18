@@ -1,0 +1,70 @@
+/* Archivo: static/css/styles.css */
+
+html, body {
+    height: 100%; /* Asegura que el documento tenga la altura completa de la ventana */
+    margin: 0; /* Elimina márgenes */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos verticalmente */
+}
+
+main {
+    flex: 1; /* Permite que <main> ocupe todo el espacio restante entre el header y el footer */
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+

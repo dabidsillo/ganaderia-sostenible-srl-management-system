@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Animales{% endblock %}
+
+{% block content %}
+<h1>Lista de Animales</h1>
+
+<!-- Botón para Crear Nuevo Animal -->
+<a href="{% url 'animals:animal_create' %}" class="btn btn-primary">Agregar Nuevo Animal</a>
+
+<!-- Lista de Animales -->
+{% for animal in animals %}
+    <div>
+        <h2><a href="{{ animal.get_absolute_url }}">{{ animal.name }}</a></h2>
+        <p>Raza: {{ animal.breed }} - Nacido el {{ animal.date_of_birth }}</p>
+    </div>
+{% empty %}
+    <p>No hay animales registrados actualmente.</p>
+{% endfor %}
+
+
+
+
+{% endblock %}

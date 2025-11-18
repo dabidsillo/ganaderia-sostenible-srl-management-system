@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Crear Nuevo Animal{% endblock %}
+
+{% block content %}
+<h1>Agregar Nuevo Animal</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'animals:animal_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
