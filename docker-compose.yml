@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  django:
+    build:
+      context: .
+    container_name: django_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./static:/app/static
+      - ./media:/app/media
+    environment:
+      DJANGO_SECRET_KEY: "django-insecure-l8@8pkj9sj#!rbh4fr^tf=ck2p$j8h=$r8yt&s@abqd_gw=g67"
+      DJANGO_DEBUG: "True"
+    command: python manage.py runserver 0.0.0.0:8000

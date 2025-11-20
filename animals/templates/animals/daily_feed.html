@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Alimentación del Día{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Alimentación para el {{ date_filter }}</h1>
+
+    <!-- Filtro por Fecha -->
+    <form method="get" action="{% url 'animals:daily_feed' %}" class="mb-6 flex items-center space-x-4">
+        <label for="date" class="text-gray-700 font-medium">Filtrar por Fecha:</label>
+        <input type="date" id="date" name="date" class="border border-gray-300 rounded px-4 py-2" value="{{ date_filter }}">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Filtrar</button>
+    </form>
+
+    <!-- Tabla de Alimentación -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="py-2 px-4 text-left">Animal</th>
+                    <th class="py-2 px-4 text-left">Raza</th>
+                    <th class="py-2 px-4 text-left">Comida (kg)</th>
+                    <th class="py-2 px-4 text-left">Agua (litros)</th>
+                    <th class="py-2 px-4 text-left">Estado</th>
+                    <th class="py-2 px-4 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feed in feeds %}
+                <tr class="border-t hover:bg-gray-100">
+                    <td class="py-2 px-4 font-semibold">{{ feed.animal.name }}</td>
+                    <td class="py-2 px-4">{{ feed.animal.breed }}</td>
+                    <td class="py-2 px-4">{{ feed.food_amount|floatformat:2 }}</td>
+                    <td class="py-2 px-4">{{ feed.water_amount|floatformat:2 }}</td>
+                    <td class="py-2 px-4">
+                        {% if feed.get_status_display == 'Pendiente' %}
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Pendiente</span>
+                        {% else %}
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completado</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-2 px-4">
+                        {% if feed.get_status_display == 'Pendiente' %}
+                        <form method="post" action="{% url 'animals:complete_feed' feed.id %}" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                                Alimentar
+                            </button>
+                        </form>
+                        {% else %}
+                        <span class="text-gray-500 italic">No disponible</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if feeds|length == 0 %}
+    <p class="mt-6 text-gray-600 italic">No se encontraron alimentaciones para esta fecha.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Alimentar {{ animal.name }}{% endblock %}
+
+{% block content %}
+<h1>Alimentar {{ animal.name }}</h1>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+<p><strong>Raza:</strong> {{ animal.breed }}</p>
+<p><strong>Edad:</strong> {{ animal.calculate_age }} años</p>
+<p><strong>Estado de Gestación:</strong> {{ animal.pregnancy_status }}</p>
+<p><strong>Consumo de Comida:</strong> {{ animal.calculate_food_consumption|floatformat:2 }} kg</p>
+<p><strong>Consumo de Agua:</strong> {{ animal.calculate_water_consumption|floatformat:2 }} litros</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Alimentar</button>
+</form>
+
+{% endblock %}

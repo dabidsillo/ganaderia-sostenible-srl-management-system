@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Historial de Movimientos{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Historial de Movimientos</h1>
+
+    <!-- Filtro por fechas -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Filtrar por Fechas</h2>
+        <form method="get">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label for="start_date" class="block text-gray-600 font-medium">Desde:</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ start_date }}" class="form-control">
+                </div>
+                <div>
+                    <label for="end_date" class="block text-gray-600 font-medium">Hasta:</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ end_date }}" class="form-control">
+                </div>
+                <div class="flex items-end">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                        Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla de movimientos -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-gray-100 border border-gray-300 shadow-md rounded-lg overflow-hidden">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left font-medium">Fecha</th>
+                        <th class="py-3 px-4 text-left font-medium">Recurso</th>
+                        <th class="py-3 px-4 text-left font-medium">Movimiento</th>
+                        <th class="py-3 px-4 text-left font-medium">Cantidad</th>
+                        <th class="py-3 px-4 text-left font-medium">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr class="border-t hover:bg-gray-200">
+                        <td class="py-3 px-4 text-gray-600">{{ log.date }}</td>
+                        <td class="py-3 px-4 font-semibold text-gray-700">{{ log.resource.name }}</td>
+                        <td class="py-3 px-4">
+                            {% if log.quantity > 0 %}
+                                <span class="text-green-600 font-medium">Ingreso</span>
+                            {% else %}
+                                <span class="text-red-600 font-medium">Egreso</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-3 px-4">{{ log.quantity }}</td>
+                        <td class="py-3 px-4">{{ log.description|default:"-" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="py-4 text-center text-gray-500 italic">No hay movimientos registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
