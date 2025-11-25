@@ -9,7 +9,7 @@ from django.db import IntegrityError
 
 def generate_daily_feed(request):
     """Genera la alimentación diaria consultando a la IA."""
-    CHATGPT_API_KEY = "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"
+    CHATGPT_API_KEY = ""
     city = "Santa Cruz, Bolivia"
 
     # Obtener datos del clima
